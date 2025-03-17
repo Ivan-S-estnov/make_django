@@ -1,0 +1,93 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Роутер",
+        "description": "Устройство, которое принимает интернет из внешней сети и распределяет на подключённые к нему домашние устройства.",
+        "photo": "product/photo/15500.png",
+        "category": 2,
+        "price": 5500,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Монитор",
+        "description": "",
+        "photo": "product/photo/233000.png",
+        "category": 2,
+        "price": 33000,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Ноутбук",
+        "description": "Переносной компьютер, в корпусе которого объединены типичные компоненты персонального компьютера, включая дисплей, клавиатуру и устройство указания (обычно сенсорная панель или тачпад), а также аккумуляторные батареи.",
+        "photo": "product/photo/355000.png",
+        "category": 2,
+        "price": 55000,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Карманный персональный компьютер, дополненный функциональностью мобильного телефона.",
+        "photo": "product/photo/437000.png",
+        "category": 2,
+        "price": 37000,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Холодильник",
+        "description": "Устройство, поддерживающее низкую температуру в теплоизолированной камере. Применяется обычно для хранения пищи или предметов, требующих хранения в прохладном месте.",
+        "photo": "product/photo/529000.png",
+        "category": 1,
+        "price": 29000,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Пылесос",
+        "description": "",
+        "photo": "product/photo/67000.png",
+        "category": 1,
+        "price": 7000,
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "стиральная машина",
+        "description": "",
+        "photo": "product/photo/724000.png",
+        "category": 1,
+        "price": 24000,
+        "created_at": null,
+        "updated_at": null
+    }
+}
+]
