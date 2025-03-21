@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="{% static 'js/color-modes.js' %}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Форма Blog</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-text">Blog</h1>
+                    <a class="btn btn-outline-success btn-lg" href="{% url 'blog:article_create' %}" role="button">Создать новый Blog</a>
+
+                    <ul class="list-group">
+                        {% for article in articles %}
+                        <li class="list-group-item">
+                            <a class="btn btn-outline-primary" href="{% url 'blog:article_detail' article.pk %}" role="button">{{ article.name }}</a>
+                            <a class="btn btn-outline-dark" href="{% url 'blog:article_update' article.pk %}" role="button">Редактировать</a>
+                            <a class="btn btn-outline-danger" href="{% url 'blog:article_delete' article.pk %}" role="button">Удалить</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

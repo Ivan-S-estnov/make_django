@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="{% static 'js/color-modes.js' %}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Форма Blog</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-text">{{ article.name }}</h2>
+                    <p>{{ article.description }}</p>
+                    <p>{{ article.photo }}</p>
+                    <p>Создано: {{ article.created_at }}</p>
+                    <p>Обновлено: {{ article.updated_at }}</p>
+                    <p>Количество просмотров: {{ article.views_counter }}</p>
+                    <a class="btn btn-outline-primary" href="{% url 'blog:article_list'%}" role="button">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
