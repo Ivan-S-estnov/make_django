@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="{% static 'js/color-modes.js' %}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Форма NewModel</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form class="row" method="post" enctype="multipart/form-data">
+        <div class="card">
+          <div class="card-body">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-outline-primary">
+                {% if object %}
+                Сохранить
+                {% else %}
+                Создать
+                {% endif %}
+              </button>
+              <a class="btn btn-outline-dark" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
