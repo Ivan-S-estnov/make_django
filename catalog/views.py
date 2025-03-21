@@ -64,9 +64,9 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         user = self.request.user
-        if user.has_perm('catalog.can_unpublish_product'):
+        if user == self.object.owner:
             return CatalogForm
-        if user.has_perm('catalog.can_delete_product'):
+        if user.has_perm('catalog.can_unpublish_product'):
             return CatalogAdminForm
         raise PermissionDenied
 
