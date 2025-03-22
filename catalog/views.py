@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 from catalog.forms import CatalogForm, CatalogAdminForm
@@ -30,11 +30,12 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:products_list")
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        self.object.product += 1
+    def form_valid(self, form):
+        self.object = form.save()
+        user = self.request.user
+        self.object.owner = user
         self.object.save()
-        return self.object
+        return super().form_valid(form)
 
 class ProductListView(ListView):
     model = Product
@@ -73,7 +74,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("catalog:product_detail", args=[self.kwargs.get("pk")])
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:products_list")
