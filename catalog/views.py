@@ -74,10 +74,14 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("catalog:product_detail", args=[self.kwargs.get("pk")])
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:products_list")
+
+    def test_func(self):
+        """ UserPassesTestMixin Tests"""
+        return True
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
