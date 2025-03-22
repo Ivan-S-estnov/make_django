@@ -20,12 +20,12 @@ class StyleFormMixin:
 class CatalogForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
-        exclude = ("views_counter", "owner")
+        exclude = ("views_counter",)
 
 class CatalogAdminForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
-        exclude = ("views_counter",)
+        fields = ("publish_product",)
 
     def clean_price(self):
         price = self.cleaned_data.get('price')
