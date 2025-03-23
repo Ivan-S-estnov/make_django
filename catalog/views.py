@@ -82,11 +82,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         user = self.request.user
-        if user == self.object.owner:
-            return CatalogForm
-        if user.has_perm('catalog.can_delete_product'):
-            return CatalogAdminForm
-        raise PermissionDenied
+        return user == self.object.owner or user.has_perm('catalog.can_delete_product')
 
 
     # def form_valid(self, form):
