@@ -26,7 +26,7 @@ def contacts(request):
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    form_class = CatalogForm
+    form_class = CatalogForm, CatalogAdminForm
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:products_list")
 
@@ -55,7 +55,7 @@ class ProductDetailView(DetailView):
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
-    form_class = CatalogForm
+    form_class = CatalogForm, CatalogAdminForm
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:product_list")
 
@@ -76,12 +76,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
 class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
+    form_class = CatalogForm, CatalogAdminForm
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:products_list")
 
     def test_func(self):
-        """ UserPassesTestMixin Tests"""
-        return self.request.user == self.object.owner
+        user = self.request.user
+        if user == self.object.owner:
+            return CatalogForm
+        if user.has_perm('catalog.can_delete_product'):
+            return CatalogAdminForm
+        raise PermissionDenied
+
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
