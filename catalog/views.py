@@ -81,7 +81,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         """ UserPassesTestMixin Tests"""
-        return True
+        return self.request.user == self.object.owner
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
