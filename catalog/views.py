@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from catalog.service import get_product_cache
 
 from catalog.forms import CatalogForm, CatalogAdminForm
 from catalog.models import Product
@@ -41,6 +41,9 @@ class ProductListView(ListView):
     model = Product
     template_name = "catalog/product_list.html"
     context_object_name = "products"
+
+    def get_queryset(self):
+        return get_product_cache()
 
 class ProductDetailView(DetailView):
     model = Product
@@ -82,11 +85,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         user = self.request.user
-        if user == self.object.owner:
-            return CatalogForm
-        if user.has_perm('catalog.can_delete_product'):
-            return CatalogAdminForm
-        raise PermissionDenied
+        return user == self.object.owner or user.has_perm('catalog.can_delete_product')
 
 
     # def form_valid(self, form):
