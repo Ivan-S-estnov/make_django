@@ -114,6 +114,15 @@ MEDIA_URL = "media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+CACHE_ENABLED = True
+if CACHE_ENABLED:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': os.getenv('LOCATION'),
+        }
+    }
+
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/product/'
