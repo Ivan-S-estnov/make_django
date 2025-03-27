@@ -11,6 +11,8 @@
                 <p class="card-text">{{ product.name }}</p>
                 <p class="card-text">Цена: {{ product.price }}</p>
                 <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.category }}</p>
+
                 {% if "catalog.can_unpublish_product" in perms %}
                     <form action="{% url 'catalog:unpublish_product' product.id %}" method="post">
                         {% csrf_token %}
